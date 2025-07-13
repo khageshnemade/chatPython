@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>Chat Room</title></head>
+<body>
+  <h2>Thread ID: {{ thread_id }}</h2>
+  <div id="chat-box"></div>
+  <input type="text" id="message-input">
+  <button onclick="sendMessage()">Send</button>
+
+  <script>
+    const threadId = "{{ thread_id }}";
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/chat/' + threadId + '/'
+    );
+
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const box = document.getElementById('chat-box');
+        box.innerHTML += '<p><strong>' + data.username + '</strong>: ' + data.message + '</p>';
+    };
+
+    function sendMessage() {
+        const input = document.getElementById('message-input');
+        chatSocket.send(JSON.stringify({
+            'message': input.value
+        }));
+        input.value = '';
+    }
+  </script>
+</body>
+</html>
