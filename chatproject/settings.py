@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'daphne',
     'rest_framework',
     'corsheaders',
     'channels',
@@ -81,6 +81,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chatdb',
         'USER': 'root',
+        # 'USER': 'chatpython',
+        # 'PASSWORD': 'chatpython',
         'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
