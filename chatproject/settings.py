@@ -125,4 +125,8 @@ SWAGGER_SETTINGS = {
     }
 }
 
+#for swagger tell use https only
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
