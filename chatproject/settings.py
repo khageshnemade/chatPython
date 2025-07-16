@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'chatapp',
+    'drf_yasg',  # ✅ required for templates to load
+
 ]
 
 MIDDLEWARE = [
@@ -47,21 +49,21 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'chatproject.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [],  # Optional: add templates dir if needed
+        'APP_DIRS': True,  # ✅ Needed for drf-yasg templates
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # ✅ required by drf-yasg
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
 
 ASGI_APPLICATION = 'chatproject.asgi.application'
 
@@ -80,8 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chatdb',
-        'USER': 'chatpython',
-        'PASSWORD': 'chatpython',
+        # 'USER': 'chatpython',
+        'USER': 'root',
+        # 'PASSWORD': 'chatpython',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -103,12 +107,22 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # ✅ required for collectstatic
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # JWT Authentication
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+}
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+        }
+    }
 }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
