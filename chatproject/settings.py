@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -27,8 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
-
     'rest_framework',
     'corsheaders',
     'channels',
@@ -80,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chatdb',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'chatpython',
+        'PASSWORD': 'chatpython',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -103,7 +103,7 @@ USE_TZ = True
 
 # Static files
 STATIC_URL = 'static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # ✅ required for collectstatic
 # JWT Authentication
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
