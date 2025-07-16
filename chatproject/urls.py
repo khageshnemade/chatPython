@@ -6,15 +6,21 @@ from drf_yasg import openapi
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf import settings
 from django.conf.urls.static import static
+
+# Swagger UI settings
 schema_view = get_schema_view(
-    openapi.Info(
-        title="Chat API",
-        default_version="v1",
-        description="API documentation for your Django chat project",
-    ),
-    public=True,  # ✅ Make Swagger public
-    permission_classes=(permissions.AllowAny,),  # ✅ No auth required for Swagger docs
+   openapi.Info(
+      title="HR Counsultancy swagger api ",
+      default_version='v1',
+      description="API list for Counsultancy Project",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="faizan@mandates.in"),
+      license=openapi.License(name="MIT License"),
+   ),
+   public=True,
 )
+
+
 
 urlpatterns = [
     # ✅ Swagger Docs (no login required)
