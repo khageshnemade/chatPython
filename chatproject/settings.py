@@ -127,13 +127,6 @@ SWAGGER_SETTINGS = {
 
 #for swagger tell use https only
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# Make sure you're using secure cookies (and other security features)
-SECURE_SSL_REDIRECT = True  # Redirect all HTTP to HTTPS
-SECURE_HSTS_SECONDS = 31536000  # Enable HTTP Strict Transport Security (HSTS)
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply to all subdomains
-SECURE_HSTS_PRELOAD = True  # Preload HSTS in browsers
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
