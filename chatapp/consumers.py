@@ -1,6 +1,7 @@
 import json
 import redis.asyncio as aioredis
 from channels.generic.websocket import AsyncWebsocketConsumer
+import pprint
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -25,7 +26,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data):
         data = json.loads(text_data)
         message = data['message']
-        username = self.scope["user"].username
+
+        print("\n🔍 Incoming Data:")
+        pprint.pprint(data)
+
+        print("\n🔍 Full Scope:")
+        pprint.pprint(self.scope)
+
+        username = self.scope["user"].username  # Will fail if user is AnonymousUser
+        print("\n🔍 Username:", username)
 
         # Store message in Redis list
         redis = await aioredis.from_url("redis://127.0.0.1")
